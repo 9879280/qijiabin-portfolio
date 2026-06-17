@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>齐家滨 · 关卡策划作品集</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: #1a1a1a; background: #fafafa; line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; color: #1a1a1a; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: #666; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: #1a1a1a; }
+
+  section { padding: 100px 40px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* ── Hero ── */
+  .hero { padding-top: 180px; padding-bottom: 120px; text-align: center; background: linear-gradient(180deg, #fff 0%, #fafafa 100%); }
+  .hero-tag { display: inline-block; font-size: 13px; font-weight: 600; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; border: 1px solid rgba(0,0,0,0.1); padding: 6px 18px; border-radius: 100px; }
+  .hero h1 { font-size: 64px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.15; }
+  .hero h1 span { display: block; font-size: 28px; font-weight: 400; color: #888; margin-top: 8px; letter-spacing: 0; }
+  .hero p { max-width: 520px; margin: 28px auto 0; color: #666; font-size: 17px; line-height: 1.8; }
+
+  /* ── Stats ── */
+  .stats { padding: 0 40px 80px; }
+  .stats-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e8e8e8; border-radius: 16px; overflow: hidden; }
+  .stat-item { background: #fff; padding: 40px 32px; text-align: center; }
+  .stat-num { font-size: 36px; font-weight: 800; letter-spacing: -0.5px; color: #1a1a1a; }
+  .stat-label { font-size: 13px; color: #999; margin-top: 6px; }
+
+  /* ── Section Title ── */
+  .sec-label { font-size: 12px; font-weight: 700; color: #aaa; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+  .sec-title { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; }
+  .sec-desc { font-size: 16px; color: #777; max-width: 560px; }
+
+  /* ── Featured ── */
+  .featured { background: #fff; padding: 100px 40px; }
+  .featured-card { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 56px; }
+  .featured-card.reverse { direction: rtl; }
+  .featured-card.reverse .featured-text { direction: ltr; }
+  .featured-img { aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; }
+  .featured-img img { width: 100%; height: 100%; object-fit: cover; }
+  .featured-tag { font-size: 12px; font-weight: 700; color: #3B82F6; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .featured-text h3 { font-size: 28px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 12px; }
+  .featured-text .meta { font-size: 14px; color: #888; margin-bottom: 16px; }
+  .featured-text .meta strong { color: #1a1a1a; font-size: 20px; }
+  .featured-text .desc { font-size: 15px; color: #555; line-height: 1.8; }
+  .featured-text .tags { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 100px; background: #f3f3f3; color: #666; font-weight: 500; }
+
+  /* ── Design Detail Cards ── */
+  .design-details { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .design-detail-card { padding: 32px; background: #fafafa; border-radius: 12px; }
+  .design-detail-card .label { font-size: 13px; font-weight: 700; color: #999; margin-bottom: 8px; }
+  .design-detail-card p { font-size: 14px; color: #555; line-height: 1.8; }
+
+  /* ── Case Study ── */
+  .case-study { background: #fafafa; }
+  .case-block { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .case-img { aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; }
+  .case-img img { width: 100%; height: 100%; object-fit: cover; }
+  .case-detail h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .case-detail .sub { font-size: 13px; color: #999; margin-bottom: 16px; }
+  .case-detail .detail-block { margin-bottom: 20px; }
+  .case-detail .detail-block strong { display: block; font-size: 13px; color: #555; margin-bottom: 4px; }
+  .case-detail .detail-block p { font-size: 14px; color: #777; line-height: 1.8; }
+  .case-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+
+  /* ── Expanded Case Study ── */
+  .case-expanded { margin-top: 80px; }
+  .case-expanded h3 { font-size: 22px; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #eee; }
+  .case-expanded-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .case-expanded-item { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
+  .case-expanded-item img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+  .case-expanded-item .info { padding: 24px; }
+  .case-expanded-item .info h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .case-expanded-item .info p { font-size: 13px; color: #777; line-height: 1.7; }
+
+  /* ── Gallery ── */
+  .gallery { background: #fff; }
+  .gallery-grid { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .gallery-item { border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: box-shadow 0.3s; }
+  .gallery-item:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+  .gallery-img { aspect-ratio: 4/3; overflow: hidden; position: relative; }
+  .gallery-img img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; transition: transform 0.3s; }
+  .gallery-item:hover .gallery-img img { transform: scale(1.04); }
+  .gallery-img::after { content: '🔍'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); color: #fff; font-size: 28px; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .gallery-item:hover .gallery-img::after { opacity: 1; }
+  .gallery-info { padding: 20px; }
+  .gallery-info .year { font-size: 11px; color: #aaa; font-weight: 600; }
+  .gallery-info h4 { font-size: 16px; font-weight: 700; margin: 4px 0; }
+  .gallery-info .engine { font-size: 12px; color: #999; }
+
+  /* ── Lightbox ── */
+  .lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; cursor: zoom-out; }
+  .lightbox.show { display: flex; }
+  .lightbox-img { max-width: 90vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 8px 60px rgba(0,0,0,0.5); object-fit: contain; animation: fadeIn 0.25s ease; }
+  .lightbox-close { position: absolute; top: 24px; right: 32px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.12); border: none; color: #fff; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+  /* ── Footer ── */
+  footer { background: #1a1a1a; color: #888; padding: 60px 40px; text-align: center; font-size: 14px; }
+  footer .name { color: #fff; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .contact-info { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 12px; font-size: 14px; color: #aaa; }
+  .contact-info span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ── Print Styles ── */
+  @media print {
+    @page { size: A4; margin: 12mm 10mm; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; background: #fff; }
+    nav { display: none; }
+    section { padding: 32px 0 !important; page-break-inside: avoid; }
+    section.hero { padding-top: 40px !important; padding-bottom: 60px !important; }
+    .hero { background: #fff !important; }
+    .featured { page-break-before: auto; }
+    .featured, .case-study, .gallery { background: #fff !important; }
+    .case-block, .featured-card, .case-expanded-grid, .design-details, .gallery-grid, .case-sections {
+      page-break-inside: avoid;
+    }
+    .case-expanded { margin-top: 40px !important; page-break-before: auto; }
+    .case-expanded-grid { grid-template-columns: 1fr 1fr !important; }
+    .case-expanded-item { break-inside: avoid; }
+    .case-block { grid-template-columns: 1fr 1fr !important; gap: 32px !important; margin-top: 24px !important; }
+    .featured-card { grid-template-columns: 1fr 1fr !important; gap: 40px !important; margin-top: 24px !important; }
+    .featured-img, .case-img { border-radius: 6px !important; }
+    .featured-img img, .case-img img, .case-expanded-item img, .gallery-img img { object-fit: cover; }
+    .gallery-item { break-inside: avoid; }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    .design-details { grid-template-columns: repeat(3, 1fr) !important; gap: 16px !important; margin-top: 32px !important; }
+    .design-detail-card { padding: 20px !important; }
+    .stats { padding: 0 0 60px !important; }
+    .stats-grid { grid-template-columns: repeat(3, 1fr) !important; border-radius: 8px !important; }
+    .stat-item { padding: 28px 24px !important; }
+    footer { background: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .nav-links { display: none; }
+    .lightbox { display: none !important; }
+    h1 { font-size: 48px !important; }
+    h2.sec-title { font-size: 28px !important; }
+    .sec-desc { font-size: 14px !important; }
+    .container { max-width: 100% !important; }
+    .tag { border: 1px solid #ddd; }
+    .gallery-img::after { display: none !important; }
+    .case-detail[style*="background"] { background: #fafafa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    div[style*="background:#f8f8f8"] { background: #f5f5f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .featured-tag { color: #1a1a1a !important; }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 40px; } .hero h1 span { font-size: 20px; }
+    .stats-grid, .design-details { grid-template-columns: 1fr; }
+    .featured-card, .case-block, .case-expanded-grid, .case-sections { grid-template-columns: 1fr; gap: 32px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">齐家滨</div>
+    <ul class="nav-links">
+      <li><a href="#featured">精选项目</a></li>
+      <li><a href="#case">案例研究</a></li>
+      <li><a href="#gallery">全部作品</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-tag">Level Design Portfolio</div>
+  <h1>齐家滨<span>关卡策划作品集</span></h1>
+  <p>专注于游戏关卡设计与体验塑造，拥有网易蛋仔派对多张百万级游玩地图实战经验。擅长从玩法机制、空间叙事到玩家引导的全链路关卡设计。</p>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">240<span style="font-size:20px;font-weight:600;">万</span>+</div>
+      <div class="stat-label">单图最高游玩量</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">363<span style="font-size:20px;font-weight:600;">万</span>+</div>
+      <div class="stat-label">累计总游玩量</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3<span style="font-size:20px;font-weight:600;">年</span></div>
+      <div class="stat-label">关卡设计经验</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURED 1: 拆光惊魂夜 ═══ -->
+<section class="featured" id="featured">
+  <div class="container">
+    <div class="sec-label">精选案例</div>
+    <h2 class="sec-title">拆光惊魂夜</h2>
+    <p class="sec-desc">蛋仔派对地图工坊最受欢迎的地图之一，首个突破 200 万游玩量的里程碑作品。</p>
+
+    <!-- Page 1: Overview & Stats -->
+    <div class="featured-card" style="margin-top:56px;">
+      <div class="featured-img"><img src="images/portfolio_rel_slide2_img1.jpeg" alt="拆光惊魂夜地图详情页"></div>
+      <div class="featured-text">
+        <div class="featured-tag">#1 Featured</div>
+        <h3>里程碑数据表现</h3>
+        <p class="meta"><strong>240 万</strong> 游玩量 &nbsp;·&nbsp; 6.7万 点赞 &nbsp;·&nbsp; 2024.11 发布</p>
+        <p class="desc">作为策划及美术独立产出的乐园吃豆玩法地图，项目组内首个超过 200 万游玩的作品。地图发布后在平台持续获得推荐，在引流与拉新中获得大量优秀数据反馈。</p>
+        <p class="desc" style="margin-top:12px;">地图评分 4.8 星，通关率 11.8%，保持了较高的挑战性与趣味性平衡。</p>
+        <div class="tags">
+          <span class="tag">非对称竞技</span>
+          <span class="tag">吃豆玩法</span>
+          <span class="tag">240万+ 游玩</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 2: Map Design -->
+    <div class="case-expanded" style="margin-top:80px;">
+      <h3>关卡设计与空间布局</h3>
+      <p style="font-size:14px;color:#777;line-height:1.8;margin-bottom:24px;">整体采用对称性地图设计，通过空间布局与建筑分布自然引导玩家行为，降低学习成本。</p>
+      <div class="case-expanded-grid">
+        <div class="case-expanded-item">
+          <img src="images/portfolio_rel_slide3_img4.jpeg" alt="地图俯视图">
+          <div class="info">
+            <h4>对称地图架构</h4>
+            <p>玩家出生点及逃生点位于左下侧，Boss 出生点及复活点位于右上侧，整体呈对角对称。这种布局降低了玩家的方向认知负担，方便快速建立空间意识。</p>
+          </div>
+        </div>
+        <div class="case-expanded-item">
+          <img src="images/portfolio_rel_slide4_img5.jpeg" alt="编辑器俯视图">
+          <div class="info">
+            <h4>渐进式建筑分布</h4>
+            <p>建筑物由小到大、从玩家侧向外分布，使玩家自然地由易到难上手。小型建筑靠近出生点提供早期掩体，大型建筑群靠近 Boss 区域增加后期挑战。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 3: Gameplay Screenshots -->
+    <div class="case-expanded" style="margin-top:80px;">
+      <h3>实机游戏体验</h3>
+      <p style="font-size:14px;color:#777;line-height:1.8;margin-bottom:24px;">玩家在躲避怪物的同时使用武器拆除建筑物获取积分，积分用于升级武器及解锁逃生门。玩法改编自蛋仔惊魂夜模式（类第五人格）。</p>
+      <div class="case-expanded-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="case-expanded-item">
+          <img src="images/portfolio_rel_slide2_img2.jpeg" alt="游戏截图1">
+          <div class="info">
+            <h4>躲藏阶段</h4>
+            <p>前期利用未拆除的建筑物躲避怪物追击，观察 Boss 巡逻路线。</p>
+          </div>
+        </div>
+        <div class="case-expanded-item">
+          <img src="images/portfolio_rel_slide2_img3.jpeg" alt="游戏截图2">
+          <div class="info">
+            <h4>拆光玩法</h4>
+            <p>使用咸鱼武器拆除场景中的建筑物获取积分，升级攻击力。</p>
+          </div>
+        </div>
+        <div class="case-expanded-item">
+          <img src="images/portfolio_rel_slide4_img7.png" alt="Boss追逐">
+          <div class="info">
+            <h4>Boss 战对抗</h4>
+            <p>后期等级提升后可直接使用武器反击 Boss，形成先躲后打的成长曲线。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design Highlights -->
+    <div class="design-details">
+      <div class="design-detail-card">
+        <div class="label">地图设计</div>
+        <p>整体地图对称性设计——玩家出生点及逃生点位于左下侧，Boss 出生点及复活点位于右上侧，降低玩家理解与上手门槛。</p>
+      </div>
+      <div class="design-detail-card">
+        <div class="label">建筑分布</div>
+        <p>建筑物由小到大、从玩家侧向外分布，使玩家自然地由易到难上手，无需硬性教程引导也能顺利掌握游戏节奏。</p>
+      </div>
+      <div class="design-detail-card">
+        <div class="label">玩法节奏</div>
+        <p>前期利用未拆除的建筑物躲避怪物，后期等级升高后可直接使用武器反击 Boss，形成先躲后打的成长曲线。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURED 2: 健身房塔防 ═══ -->
+<section class="featured" style="background:#fafafa;">
+  <div class="container">
+    <h2 class="sec-title">健身房塔防</h2>
+    <p class="sec-desc">首个突破 100 万游玩的蛋仔派对乐园地图，塔防玩法创新实践。</p>
+    <div class="featured-card reverse">
+      <div class="featured-img"><img src="images/portfolio_rel_slide26_img59.jpeg" alt="健身房塔防地图"></div>
+      <div class="featured-text">
+        <div class="featured-tag">#2 Milestone</div>
+        <h3>健身房塔防</h3>
+        <p class="meta"><strong>123 万</strong> 游玩量 &nbsp;·&nbsp; 2024 &nbsp;·&nbsp; 蛋仔派对乐园项目</p>
+        <p class="desc">在蛋仔派对乐园中创新性地实现了塔防玩法，将健身主题与策略防御巧妙结合。地图发布后迅速获得大量玩家关注与点赞，成为项目组内首个突破 100 万游玩量的标杆作品，验证了创意玩法在 UGC 平台的可行性。</p>
+        <div class="tags">
+          <span class="tag">塔防玩法</span>
+          <span class="tag">主题创新</span>
+          <span class="tag">UGC平台</span>
+          <span class="tag">百万标杆</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDY: 遗迹深处 (EXPANDED) ═══ -->
+<section class="case-study" id="case" style="background:#fff;">
+  <div class="container">
+    <div class="sec-label">深度案例研究</div>
+    <h2 class="sec-title">遗迹深处</h2>
+    <p class="sec-desc">UE5 第一人称动作冒险——从白盒搭建到谜题设计的完整关卡实践。</p>
+
+    <!-- Page 1: 关卡概况 - Cover Image -->
+    <div class="case-block">
+      <div class="case-img" style="aspect-ratio:auto;">
+        <img src="images/ruins_cover_whitebox.jpg" alt="遗迹深处 UE5 白盒场景" style="width:100%; border-radius:12px;">
+      </div>
+      <div class="case-detail">
+        <h3>关卡概况</h3>
+        <p class="sub">UE5 · 第一人称 · 线性冒险</p>
+        <div class="detail-block">
+          <strong>世界观</strong>
+          <p>世界上还留存着许多古代文明，人们无法理解其运作方式也无法用现代科学复刻，但可以通过遗迹获取珍稀资源。能掌握这些资源的人凤毛麟角。</p>
+        </div>
+        <div class="detail-block">
+          <strong>故事背景</strong>
+          <p>玩家与同伴是研究人员兼冒险者，在一座仍然运作的古代遗迹探险路上遇到探索者劫匪，看着同伴被"拖入"内部后晕厥。玩家追寻失踪同伴的踪迹，一边潜行击杀敌人一边逐步深入，最终发现同伴并非受害者，而是主动进入遗迹的人——一个细思极恐的叙事反转。</p>
+        </div>
+        <div class="detail-block">
+          <strong>主线 & 支线目标</strong>
+          <p>主线深入遗迹找到失踪同伴；支线探索古文物并通过窃听敌人对话了解故事背景。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 2: 2D Layout Flow -->
+    <div style="margin-top:80px;">
+      <h3>2D 关卡布局 & 动线设计</h3>
+      <p style="font-size:14px;color:#777;line-height:1.8;margin-bottom:24px;">线性推进，按玩家体验节奏划分为三个核心分区——学习 → 战斗 → 解谜，形成完整叙事弧线。</p>
+      <div style="background:#f3f3f3; border-radius:12px; padding:32px; margin-bottom:32px;">
+        <img src="images/ruins_2d_layout_full.jpg" alt="遗迹深处 2D Layout 关卡动线" style="width:100%; display:block;">
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div style="background:#f8f8f8; border-radius:10px; padding:24px;">
+          <div style="font-size:12px; font-weight:700; color:#2E7D32; margin-bottom:4px;">▎学习引导区</div>
+          <strong style="font-size:14px;">外 · 遗迹入口</strong>
+          <p style="font-size:13px;color:#777;margin-top:8px;line-height:1.7;">玩家自出生点出发，在遗迹外部区域学习基础操作（移动、攀爬、互动），通过环境叙事了解故事背景。低压力区，无敌人，让玩家安全建立操作信心。</p>
+        </div>
+        <div style="background:#f8f8f8; border-radius:10px; padding:24px;">
+          <div style="font-size:12px; font-weight:700; color:#C62828; margin-bottom:4px;">▎战斗挑战区</div>
+          <strong style="font-size:14px;">遗迹内部 · 潜行击杀</strong>
+          <p style="font-size:13px;color:#777;margin-top:8px;line-height:1.7;">遗迹入口后遭遇探索者劫匪。利用推拉箱子创造掩体、灵活潜行击杀敌人，收集要素散落其中激励探索。</p>
+        </div>
+        <div style="background:#f8f8f8; border-radius:10px; padding:24px;">
+          <div style="font-size:12px; font-weight:700; color:#1565C0; margin-bottom:4px;">▎解谜 & Boss 战</div>
+          <strong style="font-size:14px;">重力升降台 → 结局</strong>
+          <p style="font-size:13px;color:#777;margin-top:8px;line-height:1.7;">顶端为核心谜题室与最终 Boss 战。动线由浅入深层层递进，蓝色方块标注推箱子机关位置。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 3: Background & Environment -->
+    <div class="case-block" style="margin-top:80px;">
+      <div class="case-detail" style="background:#fafafa;padding:40px;border-radius:12px;">
+        <h3>背景设定 & 环境叙事</h3>
+        <p class="sub">古墓丽影式探索冒险</p>
+        <div class="detail-block">
+          <strong>环境设计</strong>
+          <p>被遗弃的废墟遗迹中遍布图腾与神像的环境叙事，道路已崩塌需灵活利用环境冒险。灵感参考古墓丽影系列。整体场景划分为遗迹外与遗迹内两个范围，玩家在遗迹外学会基本操作并了解故事背景，遗迹内象征正式进入游戏核心体验。</p>
+        </div>
+        <div class="detail-block">
+          <strong>氛围塑造</strong>
+          <p>通过光线引导、环境音效与场景物件摆放，在无 UI 引导的前提下自然指引玩家前进方向，同时营造遗迹的神秘与危险感。</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <img src="images/ruins_slide3_img1.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;" alt="遗迹环境">
+        <img src="images/ruins_slide4_img1.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;" alt="参考设定板">
+      </div>
+    </div>
+
+    <!-- Page 4: Gameplay & Puzzle -->
+    <div class="case-expanded">
+      <h3>核心玩法与谜题设计</h3>
+      <div class="case-expanded-grid">
+        <div class="case-expanded-item" style="grid-column:span 2;">
+          <p style="font-size:14px;color:#777;line-height:1.8;margin-bottom:24px;">游戏主要交互为推拉箱子与攀爬，不同谜题配合使用使玩家易上手且有丰富长线的游玩体验。</p>
+        </div>
+        <div class="case-expanded-item">
+          <img src="images/ruins_slide5_img1.png" alt="推拉箱子玩法">
+          <div class="info">
+            <h4>推拉箱子 & 攀爬</h4>
+            <p>核心交互机制，玩家在遗迹中通过推拉箱子解谜、借助建筑结构攀爬探索垂直空间。</p>
+          </div>
+        </div>
+        <div class="case-expanded-item">
+          <img src="images/ruins_slide8_img1.png" alt="重力升降台谜题">
+          <div class="info">
+            <h4>重力升降台谜题 ⭐ 中低难度</h4>
+            <p>玩家进入谜题室收到同伴提示"小时候玩的跷跷板"，叙事上细思极恐，同时引导理解平衡机制 → 拉下箱子使平台上升 → 推箱子至另一平台 → 压住平衡木 → 跳跃至高台 → 抵达出口。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDY: 异世界开放世界 ═══ -->
+<section class="case-study" style="background:#fafafa;">
+  <div class="container">
+    <h2 class="sec-title">异世界主题开放世界</h2>
+    <p class="sec-desc">Unreal Engine 构建的 150×180m 自由探索岛屿，注重环境叙事与自然引导。</p>
+    <div class="case-block">
+      <div class="case-img"><img src="images/portfolio_rel_slide10_img15.png" alt="异世界开放世界场景"></div>
+      <div class="case-detail">
+        <div class="detail-block">
+          <strong>出生点设计</strong>
+          <p>玩家于岛尾漆黑山洞处出生，通过光线与大量萤火虫引导走出山洞，同时塑造奇幻世界的氛围感。利用自然光源而非 UI 指示引导行进方向。</p>
+        </div>
+        <div class="detail-block">
+          <strong>自由探索阶段</strong>
+          <p>走出山洞后进入开阔区域，玩家可自由观察世界构成及海岛地图。脚底路线自然引导玩家查看任务点，不做强制牵引，保留探索的自主感。</p>
+        </div>
+        <div class="detail-block">
+          <strong>任务触发</strong>
+          <p>玩家理解世界主题后到达唯一奇异点，接受任务进入下一关。从封闭到开放再到聚焦，形成完整的空间叙事弧线。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="sec-label">全部作品</div>
+    <h2 class="sec-title">项目画廊</h2>
+    <p class="sec-desc">从大学社团到专业实践的关卡设计与内容创作轨迹。</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-img"><img src="images/portfolio_rel_slide15_img26.jpeg" alt="魔蛋乐园"></div>
+        <div class="gallery-info">
+          <div class="year">2020</div>
+          <h4>魔蛋乐园</h4>
+          <div class="engine">Unreal Engine 4 · 侏罗纪场景复刻</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img"><img src="images/portfolio_rel_slide17_img33.jpeg" alt="暴风城"></div>
+        <div class="gallery-info">
+          <div class="year">2019</div>
+          <h4>暴风城</h4>
+          <div class="engine">Unity · 本科时期社团项目</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img"><img src="images/portfolio_rel_slide18_img39.png" alt="森林场景"></div>
+        <div class="gallery-info">
+          <div class="year">2023</div>
+          <h4>森林场景</h4>
+          <div class="engine">Unreal Engine 5 · 关卡场景</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img"><img src="images/portfolio_rel_slide20_img43.png" alt="Kingdom"></div>
+        <div class="gallery-info">
+          <div class="year">2023</div>
+          <h4>Kingdom</h4>
+          <div class="engine">Unreal Engine 5 · 关卡场景 · 视频 00:10'</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img"><img src="images/portfolio_rel_slide21_img44.png" alt="避难所"></div>
+        <div class="gallery-info">
+          <div class="year">2023</div>
+          <h4>避难所</h4>
+          <div class="engine">Unreal Engine 5 · 末世幸存者社区</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img"><img src="images/portfolio_rel_slide23_img49.png" alt="白盒场景还原"></div>
+        <div class="gallery-info">
+          <div class="year">2025</div>
+          <h4>白盒场景还原</h4>
+          <div class="engine">Unreal Engine 5 · 视频 00:09'</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img"><img src="images/portfolio_rel_slide28_img68.jpeg" alt="蛋仔番茄钟"></div>
+        <div class="gallery-info">
+          <div class="year">2024</div>
+          <h4>蛋仔番茄钟</h4>
+          <div class="engine">蛋仔派对乐园 · 参考 Spirit City</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact">
+  <div class="name">齐家滨</div>
+  <p style="margin:8px 0;">关卡策划 · 中央美术学院 28届</p>
+  <div class="contact-info">
+    <span>📧 <a href="mailto:894536736@qq.com" style="color:#aaa;text-decoration:none;">894536736@qq.com</a></span>
+    <span>💬 微信：qooooooooob</span>
+  </div>
+  <p style="font-size:13px; color:#666; margin-top:16px;">© 2024 齐家滨 · 关卡策划作品集</p>
+</footer>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) { document.getElementById('lightboxImg').src = src; document.getElementById('lightbox').classList.add('show'); document.body.style.overflow = 'hidden'; }
+function closeLightbox() { document.getElementById('lightbox').classList.remove('show'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+document.querySelector('.gallery-grid').addEventListener('click', function(e) {
+  var img = e.target.closest('.gallery-img img');
+  if (img) { e.stopPropagation(); openLightbox(img.src); }
+});
+</script>
+
+</body>
+</html>
